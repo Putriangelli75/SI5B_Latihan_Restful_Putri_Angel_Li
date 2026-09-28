@@ -14,7 +14,6 @@ app.get('/hubungi', (req, res) => {
     res.send('Ini halaman hubungi saya');
 });
 
-
 // Middleware agar req.body (JSON) dapat dibaca
 app.use(express.json());
 
@@ -26,8 +25,16 @@ let mahasiswa = [
 let nextId = 3; // penghitung id untuk data baru
 
 // GET /mahasiswa -> menampilkan seluruh data
+// GET /mahasiswa?jurusan=Sistem Informasi
 app.get('/mahasiswa', (req, res) => {
-  res.json(mahasiswa);
+    const { jurusan } = req.query;
+
+    if (jurusan) {
+        const hasil = mahasiswa.filter((m) =>
+        m.jurusan === jurusan);
+        return res.json(hasil);
+}
+        res.json(mahasiswa);
 });
 
 // GET /mahasiswa/:id -> menampilkan satu data berdasarkan id
@@ -37,6 +44,22 @@ app.get('/mahasiswa/:id', (req, res) => {
 
   if (!data) return res.status(404).json({ message: 'Data tidak ditemukan' });
   res.json(data);
+});
+
+// POST /mahasiswa
+// Body: { "nama": "Citra", "jurusan": "Sistem Informasi" } 
+
+app.post('/mahasiswa', (req, res) => {
+  const { nama, jurusan } = req.body;
+
+  if (!nama || !jurusan) {
+    return res.status(400).json({ message: 'nama dan jurusan wajib diisi' });
+  }
+
+  const baru = { id: nextId++, nama, jurusan };
+
+  mahasiswa.push(baru); // simpan ke dalam array
+  res.status(201).json(baru); // response json
 });
 
 app.listen(PORT, () => {
