@@ -1,5 +1,4 @@
 $kind: http-request
-name: Mahasiswa Jurusan
 url: ""
 method: GET
-order: 1459
+order: 4000
