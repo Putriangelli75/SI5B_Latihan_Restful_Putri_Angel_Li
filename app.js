@@ -78,6 +78,32 @@ app.post('/mahasiswa', (req, res) => {
   res.status(201).json(baru); // response json
 });
 
+// PUT /mahasiswa/:id -> ubah data
+app.put('/mahasiswa/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = mahasiswa.findIndex((m) => m.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: 'Data tidak ditemukan' });
+  }
+
+  mahasiswa[index] = { ...mahasiswa[index], ...req.body, id };
+  res.json(mahasiswa[index]);
+});
+
+// DELETE /mahasiswa/:id -> hapus data
+app.delete('/mahasiswa/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = mahasiswa.findIndex((m) => m.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: 'Data tidak ditemukan' });
+  }
+
+  mahasiswa.splice(index, 1);
+  res.status(204).send();
+});
+
 app.listen(PORT, () => {
     console.log(`Server berjalan di http://localhost:${PORT}`);
 });
