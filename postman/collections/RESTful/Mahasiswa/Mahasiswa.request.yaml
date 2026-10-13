@@ -1,4 +1,4 @@
 $kind: http-request
 url: http://localhost:3000/mahasiswa
 method: GET
-order: 982
+order: 1791874591334

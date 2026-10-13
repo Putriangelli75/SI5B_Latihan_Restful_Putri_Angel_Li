@@ -3,4 +3,4 @@ url: http://localhost:3000/mahasiswa?jurusan=Sistem Informasi
 method: GET
 queryParams:
   jurusan: Sistem Informasi
-order: 1000
+order: 4502296050229492
