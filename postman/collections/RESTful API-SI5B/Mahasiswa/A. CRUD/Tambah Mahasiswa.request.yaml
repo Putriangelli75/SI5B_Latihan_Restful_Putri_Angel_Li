@@ -5,7 +5,17 @@ headers:
   x-api-key: "{{api_key}}"
 body:
   type: json
-  content: '{ "nama": "Budi Santoso", "nim": "2301002" }'
+  content: "{\r
+
+    \  \"nama\": \"Andi Pratama\",\r
+
+    \  \"nim\": \"2301001\",\r
+
+    \  \"alamat\": { \"jalan\": \"Jl. Rajawali No. 5\", \"kota\": \"Palembang\" },\r
+
+    \  \"prodiId\": \"6ad99e89509cfd9d1161684b\"\r
+
+    }"
 scripts:
   - type: afterResponse
     code: "pm.test('Status code adalah 201', function () {\r
